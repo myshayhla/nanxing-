@@ -1,0 +1,38 @@
+.main-btn {
+  background-color: #37A645;
+  padding: 13px 20px;
+  border: none;
+  border-radius: 100px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  span {
+    font-size: 16px;
+    transition: color 0.3s ease;
+  }
+
+  .arrow-icon {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+
+    path {
+      fill: currentColor;
+    }
+  }
+
+  &:hover {
+    background-color: white;
+    color: #37A645;
+
+    .arrow-icon {
+      transform: rotate(45deg);
+    }
+  }
+}
