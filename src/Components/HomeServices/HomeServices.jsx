@@ -41,7 +41,7 @@ function HomeServices() {
                 <span>{item.title}</span>
                 <p className="desc">{item.desc}</p>
                 <div>
-                  <Link className="link">
+                  <Link className="link" to={"/about-us"}>
                     <p>Ətraflı bax </p>
                     <Arrow className="arrow-icon" />
                   </Link>
