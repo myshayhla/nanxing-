@@ -1,11 +1,11 @@
 #home-products {
-  border: 1px solid red;
   padding: 110px 7%;
   .home-products {
     .head {
       display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
       justify-content: space-between;
-      border: 1px solid red;
       margin-bottom: 50px;
       .left {
         .title {
@@ -15,17 +15,26 @@
         }
         h1 {
           padding-top: 10px;
-          max-width: 900px;
+          max-width: 740px;
           width: 100%;
           line-height: 140%;
           letter-spacing: 0.2px;
         }
       }
+      .products-btn{
+        width: auto;
+        display: block;
+        height: 60px;
+      }
     }
-    .products {
-    //   border: 2px solid blue;
+    .products{
+      // display: flex;
+      // flex-direction: column;
+
+    
+    .products-content {
       display: flex;
-      gap: 20px;
+      gap: 30px;
       .product-card {
         display: flex;
         flex-direction: column;
@@ -49,8 +58,10 @@
 
             }
             .arrow-icon {
-              width: 20px;
-              height: 20px;
+              transform: rotate(45deg);
+              padding: 8px;
+              border-radius: 50%;
+                  transition: all 300ms ease;
 
               path {
                 fill: black;
@@ -63,25 +74,62 @@
             padding-top: 10px;
         }
         }
+        &:hover{
+            .arrow-icon {
+             
+               background-color: #37A645;
+           
+              path {
+                fill: rgb(255, 255, 255) !important;
+
+              }
+            }
+        }
       }
     }
+     .product-btn{
+        display: none;
+      }
+  }
   }
    @media screen and (max-width: 991px) {
+    padding-top: 120px;
+    .head{
+      flex-direction: column  ;
+      h1{
+        font-size: 24px;
+      }
+      .products-btn{
+        display: none !important;
+      }
+    }
     margin-top: -80px;
-    .products {
+    .products-content{
       flex-wrap: wrap;
       // flex: 2 2 calc(43.333% - 100px);
-      margin: 20px 5%;
       .product-card {
         flex: 1 1 calc(40% - 30px); 
+      }
+      .products-btn{
+        display: block;
+      }
+    }
+    .products {
+      .product-btn{
+        display: flex !important ;
+        
       }
     }
   }
 
   @media screen and (max-width: 600px) {
+   
     .products {
       .product-card {
         flex: 1 1 100%; 
+      }
+      .product-btn{
+        display: block !important;
       }
     }
   }

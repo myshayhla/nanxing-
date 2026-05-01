@@ -4,6 +4,7 @@ import Img1 from "../../assets/Images/HomeProduct1.webp";
 import MainBtn from '../MainBtn/MainBtn';
 import List from "../../assets/Icons/title-icon.svg?react";
 import Arrow from "../../assets/Icons/Arrow-white.svg?react";
+import { Link } from 'react-router-dom';
 
 
 function HomeProducts() {
@@ -53,23 +54,32 @@ function HomeProducts() {
                 emalı avadanlıqları
               </h1>
             </div>
-            <div className="right">
-              <MainBtn title={"Bütün məhsullar"} />
+            <div className="products-btn">
+              <Link to={"/products"}>
+                <MainBtn title={"Bütün məhsullar"} />
+              </Link>
             </div>
           </div>
           <div className="products">
-            {machines.map((item) => (
-              <div className="product-card" key={item.id}>
-                <img src={item.img} alt={item.title} />
-                <div className="text">
-                  <div className="title">
-                    <span>{item.title}</span>
-                    <Arrow className="arrow-icon" fill="black" />
+            <div className="products-content">
+              {machines.map((item) => (
+                <div className="product-card" key={item.id}>
+                  <img src={item.img} alt={item.title} />
+                  <div className="text">
+                    <div className="title">
+                      <span>{item.title}</span>
+                      <Arrow className="arrow-icon" fill="black" />
+                    </div>
+                    <p>{item.description}</p>
                   </div>
-                  <p>{item.description}</p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            <div to={"/products"} className="product-btn">
+              <Link>
+                <MainBtn title={"Bütün məhsullar"} />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
