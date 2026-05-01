@@ -3,13 +3,15 @@ import "./Style.scss";
 import HeroSec from '../../Components/HeroSec/HeroSec';
 import HomeServices from '../../Components/HomeServices/HomeServices';
 import HomeProducts from '../../Components/HomeProducts/HomeProducts';
+import HomeAboutSec from '../../Components/HomeAboutSec/HomeAboutSec';
 
 function HomePage() {
   return (
       <>
       <HeroSec />
       <HomeServices />
-      <HomeProducts/>
+      <HomeProducts />
+      <HomeAboutSec/>
       
     </>
   );

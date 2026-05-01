@@ -1,0 +1,107 @@
+#home-about{
+    padding: 0 7% 50px 7%;
+    .home-about{
+        .head {
+        .title {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        h1 {
+          padding-top: 7px; 
+          max-width: 1000px;
+          width: 90%;
+          line-height: 140%;
+          letter-spacing: 0.2px;
+        }
+        p{
+            font-size: 16px;
+            color: #6F6F6F;
+            padding-block: 10px;
+        }
+      }
+      .about-btn{
+        width: 200px;
+        display: block;
+      }
+      .content{
+        padding-top: 40px;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        .left{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 50px;
+            .list{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                .list-element{
+                    width: 305px;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    background-color: #FFFFFF;
+                    border-radius: 55px;
+                    .number{
+                        width: 53px;
+                        height: 53px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: #ffff;
+                       border-radius: 55px;
+                        background-color: #37A645;
+                        
+                    }
+                    .title{
+                        padding: 14px 65px 14px 0;
+                    }
+                }
+            }
+
+    
+        }
+        .right{
+            max-width: 954px;
+            // width: 70%;
+            // overflow: hidden;
+            height: 100%;
+            img{
+                border-radius: 12px;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+      }
+      .about-btn-mobile{
+        display: none;
+      }
+    }
+    @media (max-width:991px){
+        .head{
+            h1{
+                font-size: 24px;
+            }
+        }
+        .content{
+            flex-direction: column-reverse;
+            .about-btn{
+                display: none !important;
+            }
+        }
+        .about-btn-mobile{
+            padding-top: 24px;
+            width: 220px;
+            display:  block !important;
+        }
+    }
+    @media (max-width:526px){
+        .about-btn-mobile{
+           width: 100%;
+        }
+    }
+}
