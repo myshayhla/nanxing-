@@ -5,6 +5,7 @@ import HomeServices from '../../Components/HomeServices/HomeServices';
 import HomeProducts from '../../Components/HomeProducts/HomeProducts';
 import HomeAboutSec from '../../Components/HomeAboutSec/HomeAboutSec';
 import HomeContact from '../../Components/HomeContact/HomeContact';
+import HomeNews from '../../Components/HomeNews/HomeNews';
 
 function HomePage() {
   return (
@@ -13,6 +14,7 @@ function HomePage() {
       <HomeServices />
       <HomeProducts />
       <HomeAboutSec />
+      <HomeNews/>
       <HomeContact/>
       
     </>

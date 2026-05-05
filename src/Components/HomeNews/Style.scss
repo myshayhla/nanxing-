@@ -1,0 +1,289 @@
+#home-news {
+  padding: 80px 7%;
+
+  .home-news {
+    .head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      .left {
+        max-width: 520px;
+      }
+
+      .title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      h1 {
+        padding-top: 7px;
+        line-height: 140%;
+        letter-spacing: 0.2px;
+      }
+    }
+
+    .news-side {
+      display: flex;
+      padding-top: 40px;
+      gap: 40px;
+
+      /* ─── LEFT SIDE ─── */
+      .left-side {
+        width: 50%;
+        position: relative;
+        flex-shrink: 0;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 12px;
+          display: block;
+        }
+
+        /* Banner overlays the bottom of the image */
+        .banner {
+          position: absolute;
+          width: 80%;
+          bottom: -50px;
+          left: 0;
+          background: #ffffff;
+          border-radius: 12px;
+          padding: 40px 36px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          text-decoration: none;
+          color: inherit;
+          transition: background 0.25s ease;
+          &:hover {
+            .detail-link span:first-child::after {
+              width: 100%;
+            }
+
+            .detail-arrow {
+              transform: rotate(0deg);
+            }
+          }
+
+          .date {
+            font-size: 14px;
+            color: #252525;
+          }
+
+          p {
+            font-size: 22px;
+            font-weight: 500;
+            color: #111;
+            line-height: 1.4;
+          }
+
+          .detail-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 4px;
+
+            span:first-child {
+              position: relative;
+              display: inline-block;
+              font-size: 14px;
+              font-weight: 500;
+              color: #111;
+
+              &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: -2px;
+                width: 0;
+                height: 1px;
+                background-color: #111;
+                transition: width 0.25s ease;
+              }
+            }
+
+            .detail-underline {
+              display: none;
+            }
+
+            .detail-arrow {
+              font-size: 16px;
+              color: #111;
+              transform: rotate(45deg);
+              display: inline-block;
+              transition: transform 0.25s ease;
+            }
+          }
+        }
+      }
+
+      /* ─── RIGHT SIDE ─── */
+      .right-side {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .blog-card {
+          display: flex;
+          flex-direction: column;
+          padding: 20px 0;
+          border-bottom: 2px solid #ECECEC;
+          text-decoration: none;
+          color: inherit;
+          cursor: pointer;
+
+          &:first-child {
+            padding-top: 0;
+          }
+
+          &:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+          }
+
+          &:hover {
+            .card-link-text {
+              color: #37A645; // adjust to your brand green
+
+              &::after {
+                width: 100%;
+              }
+            }
+
+            .arrow-icon {
+              transform: rotate(-45deg);
+            }
+          }
+
+          .blog-date {
+            font-size: 14px;
+            padding-bottom: 10px;
+          }
+
+          h3 {
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 1.4;
+            padding-bottom: 12px;
+          }
+
+          .card-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .card-link-text {
+              position: relative;
+              display: inline-block;
+              font-size: 14px;
+              font-weight: 500;
+              color: #37A645; // brand green
+              transition: color 0.2s ease;
+
+              &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: -2px;
+                width: 0;
+                height: 1px;
+                background-color: #37A645;
+                transition: width 0.25s ease;
+              }
+            }
+
+            &:hover {
+              .card-link-text::after {
+                width: 100%;
+              }
+            }
+
+            .arrow-icon {
+              width: 20px;
+              height: 20px;
+              transition: transform 0.25s ease;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    padding: 60px 5%;
+
+    .home-news {
+      .news-side {
+        .left-side {
+          width: 55%;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 991px) {
+    padding: 48px 4%;
+
+    .home-news {
+      .head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      
+          .news-btn{
+            display: none !important;
+          
+        }
+      }
+
+      .news-side {
+        flex-direction: column;
+        gap: 0;
+
+        /* Mobile: image full width, banner below (not overlapping) */
+        .left-side {
+          width: 100%;
+          margin-bottom: 100px;
+          img {
+            // height: 260px;
+            max-height: 420px;
+          }
+          .banner{
+            padding: 32px 20px;
+            bottom: -10%;
+            p{
+              font-size: 16px;
+            }
+          }
+
+      }
+
+        .right-side {
+          padding-top: 24px;
+
+          .blog-card {
+
+            h3 {
+              font-size: 17px;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 526px) {
+    .home-news {
+      .news-side {
+        .left-side {
+          .banner{
+            bottom: -20%;  
+          }
+        }
+      }
+    }
+  }
+}
