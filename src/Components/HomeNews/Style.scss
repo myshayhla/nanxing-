@@ -126,6 +126,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        padding-bottom: 50p   x;
         .blog-card {
           display: flex;
           flex-direction: column;
@@ -214,8 +215,7 @@
 
   /* ─── RESPONSIVE ─── */
   @media (max-width: 1024px) {
-    padding: 60px 5%;
-
+    padding: 20px 5%;
     .home-news {
       .news-side {
         .left-side {
@@ -226,7 +226,6 @@
   }
 
   @media (max-width: 991px) {
-    padding: 48px 4%;
 
     .home-news {
       .head {
@@ -244,12 +243,10 @@
         flex-direction: column;
         gap: 0;
 
-        /* Mobile: image full width, banner below (not overlapping) */
         .left-side {
           width: 100%;
           margin-bottom: 100px;
           img {
-            // height: 260px;
             max-height: 420px;
           }
           .banner{
@@ -264,6 +261,7 @@
 
         .right-side {
           padding-top: 24px;
+          padding-bottom: 0;
 
           .blog-card {
 
