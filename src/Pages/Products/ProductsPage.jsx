@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Style.scss";
 import { Link } from "react-router-dom";
 import NewsImg from "../../assets/Images/NewsImg.webp";
+import FilterClose from "../../assets/Icons/FilterClose.svg?react";
+import FilterOpen from "../../assets/Icons/FilterBar.svg?react";
+import Arrow from "../../assets/Icons/green-arrow.svg?react";
 
 const newsData = [
   {
@@ -91,12 +94,34 @@ const filterGroups = [
   {
     id: 1,
     label: "Kateqoriya",
-    options: ["Finance", "Technology", "Industry", "Sales", "Branding"],
+    options: [
+      "Finance",
+      "Technology",
+      "Industry",
+      "Sales",
+      "Branding",
+      "Marketing",
+      "Design",
+      "Development",
+      "Support",
+      "Logistics",
+    ],
   },
   {
     id: 2,
     label: "Tarix",
-    options: ["Bu həftə", "Bu ay", "Bu il", "Köhnə"],
+    options: [
+      "Bu həftə",
+      "Bu ay",
+      "Bu il",
+      "Köhnə",
+      "Son 3 ay",
+      "Son 6 ay",
+      "Son il",
+      "2024",
+      "2023",
+      "2022",
+    ],
   },
 ];
 
@@ -129,13 +154,15 @@ function ProductsPage() {
           className={`top-bar-btn ${filterOpen ? "active" : ""}`}
           onClick={() => setFilterOpen((p) => !p)}
         >
-          {filterOpen ? "✕" : "≡"} Filter
+          {filterOpen ? <FilterClose /> : <FilterOpen />}
+          Filter
         </button>
         <button
           className={`top-bar-btn ${sortOpen ? "active" : ""}`}
           onClick={() => setSortOpen((p) => !p)}
         >
-          ≡ Sırala
+          {sortOpen ? <FilterClose /> : <FilterOpen />}
+          Sırala
         </button>
       </div>
 
@@ -144,9 +171,12 @@ function ProductsPage() {
         <aside className={`sidebar ${filterOpen ? "open" : ""}`}>
           {filterGroups.map((group) => (
             <div className="filter-group" key={group.id}>
-              <div className="filter-group-label">{group.label}</div>
-              <div className="search-box">
-                <span className="search-icon">🔍</span>
+              <div className="filter-box filter-label-box">
+                <span className="filter-group-label">{group.label}</span>
+              </div>
+              <div className="filter-box filter-options-box">
+                <div className="search-box">
+                {/* <span className="search-icon">🔍</span> */}
                 <input
                   type="text"
                   placeholder="Search courses"
@@ -158,8 +188,8 @@ function ProductsPage() {
                     }))
                   }
                 />
-              </div>
-              <ul className="filter-options">
+                </div>
+                <ul className="filter-options">
                 {group.options
                   .filter((opt) =>
                     opt
@@ -174,7 +204,8 @@ function ProductsPage() {
                       {opt}
                     </li>
                   ))}
-              </ul>
+                </ul>
+              </div>
             </div>
           ))}
         </aside>
@@ -194,7 +225,7 @@ function ProductsPage() {
               <div className="card-body">
                 <div className="card-title-row">
                   <h3>{item.title}</h3>
-                  <span className="arrow-icon">→</span>
+                  <Arrow className="arrow-icon" />
                 </div>
                 <p>{item.desc}</p>
               </div>
