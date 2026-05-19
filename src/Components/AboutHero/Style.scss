@@ -1,0 +1,173 @@
+#about-hero {
+  padding-top: 140px;
+  padding-inline: 5%;
+  padding-bottom: 80px;
+
+  .about-hero-container {
+    h1 {
+      margin-bottom: 28px;
+      font-size: 40px;
+      font-weight: 600;
+      color: #212121;
+    }
+
+    .about-hero-content {
+      display: flex;
+      align-items: stretch; // ⭐ əsas fix
+      gap: 48px;
+    }
+
+    /* LEFT SIDE */
+    .img-wrapper {
+      position: relative;
+      width: 50%;
+      flex-shrink: 0;
+
+      /* ⭐ banner üçün boş yer */
+      padding-bottom: 160px;
+
+      img {
+        width: 100%;
+        min-height: 550px; // ⭐ şəkil daha hündür
+        height: 100%;
+        object-fit: cover;
+        border-radius: 16px;
+        display: block;
+      }
+
+      /* BANNER */
+      .banner {
+        position: absolute;
+        bottom: 30px; // artıq container içində qalır
+        right: -20%;
+        width: 450px;
+        border-radius: 12px 12px 0 0;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        z-index: 10;
+
+        .banner-top {
+          display: flex;
+
+          .tab-btn {
+            flex: 1;
+            padding: 14px 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            background: #f2f2f2;
+            color: #212121;
+            transition: 0.3s;
+
+            &.active {
+              background: #37a645;
+              color: #fff;
+            }
+
+            &:hover {
+              background: #37a645;
+              color: #fff;
+            }
+
+            &:first-child {
+              border-radius: 12px 0 0 0;
+            }
+
+            &:last-child {
+              border-radius: 0 12px 0 0;
+            }
+          }
+        }
+
+        .banner-body {
+          padding: 20px;
+          background: #fff;
+
+          p {
+            font-size: 15px;
+            line-height: 1.7;
+            margin: 0;
+
+            .green-text {
+              color: #37a645;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+    }
+
+    /* RIGHT SIDE */
+    .text-side {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding-top: 8px;
+
+      p {
+        font-size: 17px;
+        line-height: 1.8;
+        color: #444;
+      }
+    }
+  }
+
+  /* TABLET */
+  @media (max-width: 992px) {
+    padding-top: 90px;
+
+    .about-hero-container {
+      .about-hero-content {
+        flex-direction: column;
+      }
+
+      .img-wrapper {
+        width: 100%;
+        padding-bottom: 0;
+
+        img {
+          min-height: auto;
+        }
+
+        .banner {
+          position: static;
+          width: 100%;
+          margin-top: 20px;
+        }
+      }
+
+      .text-side {
+        width: 100%;
+      }
+    }
+  }
+
+  /* MOBILE */
+  @media (max-width: 576px) {
+    .about-hero-container {
+      h1 {
+        font-size: 28px;
+      }
+
+      .img-wrapper {
+        .banner {
+          .banner-top .tab-btn {
+            font-size: 13px;
+            padding: 10px 6px;
+          }
+
+          .banner-body p {
+            font-size: 13px;
+          }
+        }
+      }
+
+      .text-side p {
+        font-size: 15px;
+      }
+    }
+  }
+}

@@ -1,0 +1,87 @@
+    // #coorporate{
+    //     padding: 0 5%;
+    //     padding-top: 45px;
+    //     .coorporate-container{
+    //         .head{
+    //             display: flex;
+    //             flex-direction: column;
+    //             justify-content: center;
+    //             align-items: center;
+    //             text-align: center;
+    //         }
+    //     }
+
+    // }
+    
+    #coorporate{
+        padding: 0 5%;
+        margin-top: 45px;
+        .coorporate-container{
+            .head{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;   
+                align-items: center;   
+                max-width: 754px;
+                margin: 0 auto;     
+                gap: 10px; 
+                margin-bottom: 30px;
+            }
+            .cards{
+                background-color: #FFFFFF;
+                padding: 96px 5%;
+                .cards-container{
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 30px;
+                    .card{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 20px;
+                    
+                        .head{
+                            font-size: 18px;
+                            line-height: 150%;
+                            background-color: #ECECEC;
+                            position: relative;
+                            font-family: "DM Sans", sans-serif;
+                            width: 100%;   
+                            border-radius: 20px;
+                            .card-id{
+                                line-height: 82px;
+                                font-size: 96px;
+                                font-weight: 900;
+                                color: #37A645;
+                                width: 100%;
+                            }
+                            .id-title{
+                            position: absolute;
+                            background-color: #ECECEC;
+                            line-height: 100%;
+                            font-size: 16px;
+                            color: #37A645;
+                            font-weight: 600;
+                            padding: 4px 8px;
+                            left: 0;
+                            }
+
+            
+        
+
+                        }
+                        .content{
+                            h3{
+                                font-size: 16px;
+                                padding-bottom: 4px;
+                            }
+                            color:#211221;
+                            font-size: 14px;
+                            line-height: 150%;
+                        }
+                    }
+                }
+
+            }
+        }
+        
+    }     

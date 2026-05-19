@@ -1,0 +1,28 @@
+#video-side{
+    padding: 90px 5%;
+    .video-side-container{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        .head{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+           align-items: center;
+           justify-content: center;
+           p{
+           max-width: 700px;
+           text-align: center;
+
+           }
+        }
+        .video{
+            padding-top: 20px;
+            width: 100%;
+            img{
+                width: 100%;
+            }
+        }
+
+    }
+}
