@@ -7,6 +7,7 @@ import NewsPage from "./Pages/NewsPage/NewsPage";
 import ProductsPage from "./Pages/Products/ProductsPage";
 import Photos from "./Pages/Photos/Photos";
 import Videos from "./Pages/Videos/Videos";
+import ContactPage from "./Pages/ContactPage/ContactPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/photos" element={<Photos />} />
         <Route path="/videos" element={<Videos />} />
+        <Route path="/contact" element={<ContactPage />} />
       </Route>
     </Routes>
   );
