@@ -5,6 +5,8 @@ import "./style.scss";
 import MainLayout from "./Layout/MainLayout";
 import NewsPage from "./Pages/NewsPage/NewsPage";
 import ProductsPage from "./Pages/Products/ProductsPage";
+import Photos from "./Pages/Photos/Photos";
+import Videos from "./Pages/Videos/Videos";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <Route path="/about-us" element={<AboutPage />} />
         <Route path="/news" element={<NewsPage />} />
         <Route path="/products" element={<ProductsPage />} />
+        <Route path="/photos" element={<Photos />} />
+        <Route path="/videos" element={<Videos />} />
       </Route>
     </Routes>
   );
