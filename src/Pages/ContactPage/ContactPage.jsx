@@ -18,6 +18,7 @@ function ContactPage() {
     {
       id: 1,
       icon: <LocContact />,
+      
       title: "Ünvan",
       content: "Bakı, Azərbaycan",
     },
