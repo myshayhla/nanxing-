@@ -1,92 +1,83 @@
 import { useState } from "react";
 import "./Style.scss";
 import { Link } from "react-router-dom";
-import NewsImg from "../../assets/Images/NewsImg.webp";
+import ProductImg from "../../assets/Images/NewsImg.webp";
 import FilterClose from "../../assets/Icons/FilterClose.svg?react";
 import FilterOpen from "../../assets/Icons/FilterBar.svg?react";
 import Arrow from "../../assets/Icons/green-arrow.svg?react";
 
-const newsData = [
+const productsData = [
   {
     id: 1,
     category: "Finance",
-    date: "March 4, 2024",
     title: "Panel kəsmə maşınları",
     desc: "Yüksək dəqiqliklə panel materiallarını sürətli və minimum itki ilə kəsmək üçün ideal həllər təqdim edir.",
-    img: NewsImg,
-    link: "/news/1",
+    img: ProductImg,
+    link: "/products/1",
   },
   {
     id: 2,
     category: "Technology",
-    date: "March 5, 2024",
     title: "Kənar bantlama maşınları",
     desc: "Materialların kənarlarını estetik və davamlı şəkildə işləyərək yüksək keyfiyyətli nəticə təmin edir.",
-    img: NewsImg,
-    link: "/news/2",
+    img: ProductImg,
+    link: "/products/2",
   },
   {
     id: 3,
     category: "Industry",
-    date: "March 6, 2024",
     title: "CNC maşınları",
     desc: "Mürəkkəb dizaynları avtomatlaşdırılmış şəkildə dəqiq və sabit performansla emal edir.",
-    img: NewsImg,
-    link: "/news/3",
+    img: ProductImg,
+    link: "/products/3",
   },
   {
     id: 4,
     category: "Finance",
-    date: "March 7, 2024",
     title: "Panel kəsmə maşınları",
     desc: "Yüksək dəqiqliklə panel materiallarını sürətli və minimum itki ilə kəsmək üçün ideal həllər təqdim edir.",
-    img: NewsImg,
-    link: "/news/4",
+    img: ProductImg,
+    link: "/products/4",
   },
   {
     id: 5,
     category: "Technology",
-    date: "March 8, 2024",
     title: "Kənar bantlama maşınları",
     desc: "Materialların kənarlarını estetik və davamlı şəkildə işləyərək yüksək keyfiyyətli nəticə təmin edir.",
-    img: NewsImg,
-    link: "/news/5",
+    img: ProductImg,
+    link: "/products/5",
   },
   {
     id: 6,
     category: "Industry",
-    date: "March 9, 2024",
     title: "CNC maşınları",
     desc: "Mürəkkəb dizaynları avtomatlaşdırılmış şəkildə dəqiq və sabit performansla emal edir.",
-    img: NewsImg,
-    link: "/news/6",
+    img: ProductImg,
+    link: "/products/6",
   },
   {
     id: 7,
     category: "Finance",
-    date: "March 10, 2024",
     title: "Panel kəsmə maşınları",
     desc: "Yüksək dəqiqliklə panel materiallarını sürətli və minimum itki ilə kəsmək üçün ideal həllər təqdim edir.",
-    img: NewsImg,
-    link: "/news/7",
+    img: ProductImg,
+    link: "/products/7",
   },
   {
     id: 8,
     category: "Technology",
-    date: "March 11, 2024",
     title: "Kənar bantlama maşınları",
     desc: "Materialların kənarlarını estetik və davamlı şəkildə işləyərək yüksək keyfiyyətli nəticə təmin edir.",
-    img: NewsImg,
-    link: "/news/8",
+    img: ProductImg,
+    link: "/products/8",
   },
   {
     id: 9,
     category: "Industry",
-    date: "March 12, 2024",
     title: "CNC maşınları",
     desc: "Mürəkkəb dizaynları avtomatlaşdırılmış şəkildə dəqiq və sabit performansla emal edir.",
-    img: NewsImg,
-    link: "/news/9",
+    img: ProductImg,
+    link: "/products/9",
   },
 ];
 
@@ -147,10 +138,10 @@ function ProductsPage() {
     (selectedFilters[groupId] || []).includes(option);
 
   return (
-    <div id="news-page">
-      {/* Top Bar */}
+    <div id="products-page">
       <div className="top-bar">
         <button
+          type="button"
           className={`top-bar-btn ${filterOpen ? "active" : ""}`}
           onClick={() => setFilterOpen((p) => !p)}
         >
@@ -158,6 +149,7 @@ function ProductsPage() {
           Filter
         </button>
         <button
+          type="button"
           className={`top-bar-btn ${sortOpen ? "active" : ""}`}
           onClick={() => setSortOpen((p) => !p)}
         >
@@ -167,7 +159,6 @@ function ProductsPage() {
       </div>
 
       <div className={`page-body ${filterOpen ? "filter-visible" : ""}`}>
-        {/* Sidebar */}
         <aside className={`sidebar ${filterOpen ? "open" : ""}`}>
           {filterGroups.map((group) => (
             <div className="filter-group" key={group.id}>
@@ -176,58 +167,56 @@ function ProductsPage() {
               </div>
               <div className="filter-box filter-options-box">
                 <div className="search-box">
-                {/* <span className="search-icon">🔍</span> */}
-                <input
-                  type="text"
-                  placeholder="Search courses"
-                  value={searchTerms[group.id] || ""}
-                  onChange={(e) =>
-                    setSearchTerms((prev) => ({
-                      ...prev,
-                      [group.id]: e.target.value,
-                    }))
-                  }
-                />
+                  <input
+                    type="text"
+                    placeholder="Məhsul axtar"
+                    value={searchTerms[group.id] || ""}
+                    onChange={(e) =>
+                      setSearchTerms((prev) => ({
+                        ...prev,
+                        [group.id]: e.target.value,
+                      }))
+                    }
+                  />
                 </div>
                 <ul className="filter-options">
-                {group.options
-                  .filter((opt) =>
-                    opt
-                      .toLowerCase()
-                      .includes((searchTerms[group.id] || "").toLowerCase()),
-                  )
-                  .map((opt) => (
-                    <li key={opt} onClick={() => toggleFilter(group.id, opt)}>
-                      <span
-                        className={`checkbox ${isChecked(group.id, opt) ? "checked" : ""}`}
-                      />
-                      {opt}
-                    </li>
-                  ))}
+                  {group.options
+                    .filter((opt) =>
+                      opt
+                        .toLowerCase()
+                        .includes((searchTerms[group.id] || "").toLowerCase()),
+                    )
+                    .map((opt) => (
+                      <li key={opt} onClick={() => toggleFilter(group.id, opt)}>
+                        <span
+                          className={`checkbox ${isChecked(group.id, opt) ? "checked" : ""}`}
+                        />
+                        {opt}
+                      </li>
+                    ))}
                 </ul>
               </div>
             </div>
           ))}
         </aside>
 
-        {/* Grid */}
-        <main className="news-grid">
-          {newsData.map((item, i) => (
+        <main className="products-grid">
+          {productsData.map((product, i) => (
             <Link
-              to={item.link}
-              className="news-card"
-              key={item.id}
+              to={product.link}
+              className="product-card"
+              key={product.id}
               style={{ animationDelay: `${i * 0.05}s` }}
             >
               <div className="card-img">
-                <img src={item.img} alt={item.title} />
+                <img src={product.img} alt={product.title} />
               </div>
               <div className="card-body">
                 <div className="card-title-row">
-                  <h3>{item.title}</h3>
+                  <h3>{product.title}</h3>
                   <Arrow className="arrow-icon" />
                 </div>
-                <p>{item.desc}</p>
+                <p>{product.desc}</p>
               </div>
             </Link>
           ))}
