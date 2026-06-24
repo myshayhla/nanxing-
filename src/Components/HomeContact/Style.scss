@@ -3,21 +3,25 @@
 
   .home-contact {
     display: flex;
+
     .left {
       display: flex;
       flex-direction: column;
       gap: 20px;
+
       .head {
         .title {
           display: flex;
           align-items: center;
           gap: 10px;
         }
+
         h1 {
           padding-top: 7px;
           line-height: 140%;
           letter-spacing: 0.2px;
         }
+
         p {
           font-size: 16px;
           color: #262626;
@@ -25,10 +29,12 @@
           width: 90%;
         }
       }
+
       .buttons {
         display: flex;
         gap: 20px;
         width: 90%;
+
         .arrow-icon {
           width: 24px;
           height: 24px;
@@ -38,63 +44,69 @@
             fill: currentColor;
           }
         }
-        button {
+
+        button,
+        a.green-btn,
+        a.main-btn {
           background-color: #ffff;
           border: 1px solid #37a645;
           padding: 13px 20px;
           border-radius: 100px;
-          width: 100%;
           height: 50px;
           cursor: pointer;
           transition: all 0.3s ease;
           width: 210px;
-          a {
-            color: #37a645;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-            display: flex;
-          }
+          text-decoration: none;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 10px;
+          box-sizing: border-box;
+
           span {
-             color: #37a645;
+            color: #37a645;
             font-size: 16px;
             transition: color 0.3s ease;
           }
 
           &:hover {
-          
             background-color: #37a645;
-            span{
-                color: #ffff;
+
+            span {
+              color: #ffff;
             }
+
             .arrow-icon {
               transform: rotate(45deg);
-               path {
-            fill: #ffff;
-          }
+
+              path {
+                fill: #ffff;
+              }
             }
           }
         }
+
         .green-btn {
           background-color: #37a645;
+
           span {
             color: #ffff;
           }
 
-          .arrow-icon {
-            path {
-              fill: #ffff;
-            }
+          .arrow-icon path {
+            fill: #ffff;
           }
+
           &:hover {
             background-color: #ffff;
+
             span {
               color: #37a645;
             }
 
             .arrow-icon {
               transform: rotate(45deg);
+
               path {
                 fill: #37a645;
               }
@@ -113,23 +125,29 @@
       }
     }
   }
+
   @media (max-width: 991px) {
     .home-contact {
       flex-direction: column;
       gap: 30px;
     }
   }
+
   @media (max-width: 521px) {
     .buttons {
       flex-direction: column;
       width: 100% !important;
-      button {
+
+      button,
+      a.green-btn,
+      a.main-btn {
         width: 100% !important;
       }
     }
+
     .right {
       img {
-        height: 340px !important ;
+        height: 340px !important;
       }
     }
   }

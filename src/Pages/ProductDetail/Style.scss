@@ -6,6 +6,7 @@
   box-sizing: border-box;
   min-height: 100vh;
   color: #262626;
+  background: #f9f9f9;
 }
 
 .product-detail__container {
@@ -14,6 +15,42 @@
   align-items: start;
   gap: 48px;
   margin: 0 auto;
+}
+
+.product-detail__breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  margin-bottom: 40px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 150%;
+
+  a {
+    color: #6f6f6f;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #37a645;
+    }
+  }
+
+  .product-detail__breadcrumb-sep {
+    flex-shrink: 0;
+    font-size: 16px;
+    color: #9ca3af;
+  }
+
+  .product-detail__breadcrumb-current {
+    color: #2c2c2c;
+    font-weight: 500;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 /* ─── Slider ─── */
@@ -160,6 +197,142 @@
   font-weight: 400;
   line-height: 150%;
   color: #3f3f3f;
+}
+
+.product-detail__bottom {
+  margin-top: 48px;
+}
+
+.product-detail__tabs-panel {
+  background: transparent;
+}
+
+.product-detail__tabs-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  padding-bottom: 10px;
+  background: #f9f9f9;
+}
+
+.product-detail__tab {
+  flex: 0 0 auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 150%;
+  color: #9a9a9a;
+  cursor: pointer;
+  transition: color 0.3s ease;
+
+  &--active {
+    color: #212121;
+  }
+}
+
+.product-detail__tab-text {
+  display: inline-block;
+}
+
+.product-detail__tab-indicator {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: #212121;
+  transform: translateX(0);
+  transition:
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.product-detail__tabs-content {
+  margin-top: 16px;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 14px;
+}
+
+.product-detail__tab-panel {
+  animation: product-detail-fade-in 0.3s ease;
+}
+
+@keyframes product-detail-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.product-detail__section-title {
+  margin: 0 0 16px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #262626;
+}
+
+.product-detail__section-text {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 160%;
+  color: #3f3f3f;
+}
+
+.product-detail__specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.product-detail__specs-table-wrap {
+  border: 1px solid #ececec;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.product-detail__specs-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+
+  th,
+  td {
+    padding: 14px 20px;
+    font-size: 15px;
+    line-height: 150%;
+    text-align: left;
+    border-bottom: 1px solid #ececec;
+  }
+
+  tr:last-child th,
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  th {
+    width: 40%;
+    font-weight: 500;
+    color: #262626;
+    background: #ffffff;
+  }
+
+  td {
+    font-weight: 400;
+    color: #3f3f3f;
+    background: #ffffff;
+  }
 }
 
 .product-detail__features {
@@ -311,6 +484,44 @@
 @media (max-width: 640px) {
   #product-detail.product-detail {
     padding: 120px 5% 40px;
+  }
+
+  .product-detail__breadcrumb {
+    margin-bottom: 28px;
+    font-size: 13px;
+  }
+
+  .product-detail__breadcrumb-current {
+    white-space: normal;
+  }
+
+  .product-detail__bottom {
+    margin-top: 32px;
+  }
+
+  .product-detail__tab {
+    font-size: 15px;
+    padding: 14px 12px;
+  }
+
+  .product-detail__tabs-content {
+    padding: 16px;
+  }
+
+  .product-detail__specs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-detail__specs-table {
+    th,
+    td {
+      padding: 12px 14px;
+      font-size: 14px;
+    }
+
+    th {
+      width: 45%;
+    }
   }
 
   .product-detail__category {

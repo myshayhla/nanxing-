@@ -48,6 +48,10 @@
   }
 
   /* ─── SIDEBAR ─── */
+  .filter-backdrop {
+    display: none;
+  }
+
   .sidebar {
     width: 0;
     overflow: hidden;
@@ -58,6 +62,14 @@
     flex-shrink: 0;
     padding: 0;
     background-color: transparent;
+
+    &__mobile-head {
+      display: none;
+    }
+
+    &__content {
+      min-width: 0;
+    }
 
     &.open {
       width: 280px;
@@ -202,6 +214,13 @@
   }
 
   /* ─── PRODUCTS GRID: 4 sütun (filter bağlı), 3 sütun (filter açıq) ─── */
+  .products-page__status {
+    grid-column: 1 / -1;
+    padding: 24px;
+    font-size: 16px;
+    color: #6f6f6f;
+  }
+
   .products-grid {
     flex: 1;
     min-width: 0;
@@ -252,6 +271,13 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
+
+        .card-category {
+          font-size: 12px;
+          font-weight: 500;
+          color: #37a645;
+          line-height: 150%;
+        }
 
         .card-title-row {
           display: flex;
@@ -331,8 +357,121 @@
   }
 
   @media (max-width: 768px) {
+    --header-offset: 110px;
+
+  .filter-backdrop {
+      display: block;
+      position: fixed;
+      inset: 0;
+      top: var(--header-offset);
+      border: none;
+      padding: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 899;
+      cursor: pointer;
+      animation: products-filter-fade 0.25s ease;
+    }
+
+    .page-body {
+      position: relative;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: var(--header-offset);
+      left: 0;
+      bottom: 0;
+      width: min(320px, 100%) !important;
+      max-width: 100%;
+      padding: 0 !important;
+      opacity: 1;
+      overflow: hidden;
+      z-index: 900;
+      background: #ffffff;
+      border-right: none;
+      box-shadow: 4px 0 28px #00000024;
+      transform: translateX(-105%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      visibility: hidden;
+
+      &.open {
+        transform: translateX(0);
+        pointer-events: auto;
+        visibility: visible;
+      }
+
+      &__mobile-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 16px;
+        border-bottom: 1px solid #ececec;
+        background: #ffffff;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+
+        span {
+          font-size: 16px;
+          font-weight: 600;
+          color: #212121;
+        }
+      }
+
+      &__close-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        border: none;
+        border-radius: 8px;
+        background: #f5f5f5;
+        cursor: pointer;
+
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      &__content {
+        height: calc(100% - 57px);
+        overflow-y: auto;
+        padding: 16px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .filter-box {
+        width: 100%;
+      }
+
+      .filter-options {
+        max-height: none;
+      }
+    }
+
     .page-body.filter-visible .products-grid {
       grid-template-columns: 1fr;
+    }
+
+    .products-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 16px;
+    }
+  }
+
+  @keyframes products-filter-fade {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
     }
   }
 
@@ -342,28 +481,6 @@
 
     .top-bar {
       padding: 12px 16px;
-    }
-
-    .products-grid {
-      grid-template-columns: 1fr;
-      padding: 16px;
-    }
-
-    .page-body.filter-visible .products-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .sidebar.open {
-      position: fixed;
-      top: var(--header-offset);
-      left: 0;
-      height: calc(100vh - var(--header-offset));
-      width: min(280px, 88vw) !important;
-      background: #ffffff;
-      z-index: 900;
-      overflow-y: auto;
-      padding: 20px 14px;
-      box-shadow: 4px 0 24px #00000014;
     }
   }
 }

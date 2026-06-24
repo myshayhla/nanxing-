@@ -6,13 +6,35 @@ import Location from "../../assets/Icons/Location.svg?react";
 import LinkedIn from "../../assets/Icons/LinkedIn.svg?react";
 import Instagram from "../../assets/Icons/Instagram.svg?react";
 import Facebook from "../../assets/Icons/Facebook.svg?react";
-import { Link } from 'react-router-dom';
-// import Pinterest from "../../assets/Icons/Pinterest.svg?react";
-// import Tiktok from "../../assets/Icons/Tiktok.svg?react";
-// import Telegram from "../../assets/Icons/Telegram.svg?react";
-// import Whatsapp from "../../assets/Icons/Whatsapp.svg?react";
+import { Link } from "react-router-dom";
+import { useSettings } from "../../hooks/useSettings";
+import { CONTACT_PHONE_DISPLAY } from "../../utils/contact";
+import {
+  buildSocialLinks,
+  formatSettingsMobile,
+} from "../../utils/settingsHelpers";
 
 function Footer() {
+  const { settings } = useSettings();
+
+  const location = settings?.location || "Bakı, Azərbaycan";
+  const email = settings?.email || "info@nanxing.az";
+  const phone = settings?.mobile
+    ? formatSettingsMobile(settings.mobile)
+    : CONTACT_PHONE_DISPLAY;
+
+  const socialLinks = buildSocialLinks(settings).map((social) => ({
+    ...social,
+    icon:
+      social.id === "linkedin" ? (
+        <LinkedIn />
+      ) : social.id === "instagram" ? (
+        <Instagram />
+      ) : (
+        <Facebook />
+      ),
+  }));
+
   return (
     <footer>
       <div className="footer">
@@ -49,15 +71,15 @@ function Footer() {
             <h5>Əlaqə</h5>
             <div className="mail">
               <Mail />
-              <span>info@nanxing.az</span>
+              <span>{email}</span>
             </div>
             <div className="phone">
               <Phone />
-              <span>+994 55 123 45 67</span>
+              <span>{phone}</span>
             </div>
             <div className="location">
               <Location />
-              <span>Bakı, Azərbaycan</span>
+              <span>{location}</span>
             </div>
           </div>
         </div>
@@ -66,15 +88,17 @@ function Footer() {
         <p className="copyright">© 2026 Nanxing. Bütün hüquqlar qorunur.</p>
         <p className="credits"> Sayt hazırlandı : Birsayt.az</p>
         <div className="socials">
-          <Link to="https://www.linkedin.com/company/nanxing/">
-            <LinkedIn />
-          </Link>
-          <Link to="https://www.instagram.com/nanxing/">
-            <Instagram />
-          </Link>
-          <Link to="https://www.facebook.com/nanxing/">
-            <Facebook />
-          </Link>
+          {socialLinks.map((social) => (
+            <a
+              key={social.id}
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.id}
+            >
+              {social.icon}
+            </a>
+          ))}
         </div>
       </div>
     </footer>

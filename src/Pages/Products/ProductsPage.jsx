@@ -1,141 +1,101 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./Style.scss";
-import { Link } from "react-router-dom";
-import ProductImg from "../../assets/Images/NewsImg.webp";
 import FilterClose from "../../assets/Icons/FilterClose.svg?react";
 import FilterOpen from "../../assets/Icons/FilterBar.svg?react";
-import Arrow from "../../assets/Icons/green-arrow.svg?react";
+import { getProductCategories, getProducts } from "../../api";
+import {
+  extractCategoriesList,
+  extractProductsList,
+} from "../../utils/productHelpers";
+import {
+  DATE_FILTER_OPTIONS,
+  FILTER_GROUP_CATEGORY,
+  FILTER_GROUP_DATE,
+  filterProducts,
+} from "../../utils/productFilters";
+import ProductsPageCard from "./ProductsPageCard";
 
-const productsData = [
-  {
-    id: 1,
-    category: "Finance",
-    title: "Panel kəsmə maşınları",
-    desc: "Yüksək dəqiqliklə panel materiallarını sürətli və minimum itki ilə kəsmək üçün ideal həllər təqdim edir.",
-    img: ProductImg,
-    link: "/products/1",
-  },
-  {
-    id: 2,
-    category: "Technology",
-    title: "Kənar bantlama maşınları",
-    desc: "Materialların kənarlarını estetik və davamlı şəkildə işləyərək yüksək keyfiyyətli nəticə təmin edir.",
-    img: ProductImg,
-    link: "/products/2",
-  },
-  {
-    id: 3,
-    category: "Industry",
-    title: "CNC maşınları",
-    desc: "Mürəkkəb dizaynları avtomatlaşdırılmış şəkildə dəqiq və sabit performansla emal edir.",
-    img: ProductImg,
-    link: "/products/3",
-  },
-  {
-    id: 4,
-    category: "Finance",
-    title: "Panel kəsmə maşınları",
-    desc: "Yüksək dəqiqliklə panel materiallarını sürətli və minimum itki ilə kəsmək üçün ideal həllər təqdim edir.",
-    img: ProductImg,
-    link: "/products/4",
-  },
-  {
-    id: 5,
-    category: "Technology",
-    title: "Kənar bantlama maşınları",
-    desc: "Materialların kənarlarını estetik və davamlı şəkildə işləyərək yüksək keyfiyyətli nəticə təmin edir.",
-    img: ProductImg,
-    link: "/products/5",
-  },
-  {
-    id: 6,
-    category: "Industry",
-    title: "CNC maşınları",
-    desc: "Mürəkkəb dizaynları avtomatlaşdırılmış şəkildə dəqiq və sabit performansla emal edir.",
-    img: ProductImg,
-    link: "/products/6",
-  },
-  {
-    id: 7,
-    category: "Finance",
-    title: "Panel kəsmə maşınları",
-    desc: "Yüksək dəqiqliklə panel materiallarını sürətli və minimum itki ilə kəsmək üçün ideal həllər təqdim edir.",
-    img: ProductImg,
-    link: "/products/7",
-  },
-  {
-    id: 8,
-    category: "Technology",
-    title: "Kənar bantlama maşınları",
-    desc: "Materialların kənarlarını estetik və davamlı şəkildə işləyərək yüksək keyfiyyətli nəticə təmin edir.",
-    img: ProductImg,
-    link: "/products/8",
-  },
-  {
-    id: 9,
-    category: "Industry",
-    title: "CNC maşınları",
-    desc: "Mürəkkəb dizaynları avtomatlaşdırılmış şəkildə dəqiq və sabit performansla emal edir.",
-    img: ProductImg,
-    link: "/products/9",
-  },
-];
-
-const filterGroups = [
-  {
-    id: 1,
-    label: "Kateqoriya",
-    options: [
-      "Finance",
-      "Technology",
-      "Industry",
-      "Sales",
-      "Branding",
-      "Marketing",
-      "Design",
-      "Development",
-      "Support",
-      "Logistics",
-    ],
-  },
-  {
-    id: 2,
-    label: "Tarix",
-    options: [
-      "Bu həftə",
-      "Bu ay",
-      "Bu il",
-      "Köhnə",
-      "Son 3 ay",
-      "Son 6 ay",
-      "Son il",
-      "2024",
-      "2023",
-      "2022",
-    ],
-  },
-];
+const MOBILE_FILTER_MQ = "(max-width: 768px)";
 
 function ProductsPage() {
   const [filterOpen, setFilterOpen] = useState(false);
   const [sortOpen, setSortOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [searchTerms, setSearchTerms] = useState({});
-  const [selectedFilters, setSelectedFilters] = useState({});
+  const [selectedFilters, setSelectedFilters] = useState({
+    [FILTER_GROUP_CATEGORY]: [],
+    [FILTER_GROUP_DATE]: [],
+  });
 
-  const toggleFilter = (groupId, option) => {
+  const closeFilter = () => setFilterOpen(false);
+
+  useEffect(() => {
+    getProducts()
+      .then((response) => setProducts(extractProductsList(response)))
+      .catch((error) => console.error("Məhsullar yüklənmədi:", error));
+
+    getProductCategories()
+      .then((response) => setCategories(extractCategoriesList(response)))
+      .catch((error) => console.error("Kateqoriyalar yüklənmədi:", error))
+      .finally(() => setLoading(false));
+  }, []);
+
+  useEffect(() => {
+    if (!filterOpen) return undefined;
+
+    const isMobile = window.matchMedia(MOBILE_FILTER_MQ).matches;
+    if (!isMobile) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [filterOpen]);
+
+  const filterGroups = useMemo(    () => [
+      {
+        id: FILTER_GROUP_CATEGORY,
+        label: "Kateqoriya",
+        options: categories.map((category) => ({
+          id: String(category.id),
+          label: category.name,
+        })),
+      },
+      {
+        id: FILTER_GROUP_DATE,
+        label: "Tarix",
+        options: DATE_FILTER_OPTIONS.map((option) => ({
+          id: option.id,
+          label: option.label,
+        })),
+      },
+    ],
+    [categories]
+  );
+
+  const filteredProducts = useMemo(
+    () => filterProducts(products, selectedFilters),
+    [products, selectedFilters]
+  );
+
+  const toggleFilter = (groupId, optionId) => {
     setSelectedFilters((prev) => {
       const current = prev[groupId] || [];
       return {
         ...prev,
-        [groupId]: current.includes(option)
-          ? current.filter((o) => o !== option)
-          : [...current, option],
+        [groupId]: current.includes(optionId)
+          ? current.filter((item) => item !== optionId)
+          : [...current, optionId],
       };
     });
   };
 
-  const isChecked = (groupId, option) =>
-    (selectedFilters[groupId] || []).includes(option);
+  const isChecked = (groupId, optionId) =>
+    (selectedFilters[groupId] || []).includes(optionId);
 
   return (
     <div id="products-page">
@@ -143,7 +103,7 @@ function ProductsPage() {
         <button
           type="button"
           className={`top-bar-btn ${filterOpen ? "active" : ""}`}
-          onClick={() => setFilterOpen((p) => !p)}
+          onClick={() => setFilterOpen((prev) => !prev)}
         >
           {filterOpen ? <FilterClose /> : <FilterOpen />}
           Filter
@@ -151,7 +111,7 @@ function ProductsPage() {
         <button
           type="button"
           className={`top-bar-btn ${sortOpen ? "active" : ""}`}
-          onClick={() => setSortOpen((p) => !p)}
+          onClick={() => setSortOpen((prev) => !prev)}
         >
           {sortOpen ? <FilterClose /> : <FilterOpen />}
           Sırala
@@ -159,67 +119,93 @@ function ProductsPage() {
       </div>
 
       <div className={`page-body ${filterOpen ? "filter-visible" : ""}`}>
-        <aside className={`sidebar ${filterOpen ? "open" : ""}`}>
-          {filterGroups.map((group) => (
-            <div className="filter-group" key={group.id}>
-              <div className="filter-box filter-label-box">
-                <span className="filter-group-label">{group.label}</span>
-              </div>
-              <div className="filter-box filter-options-box">
-                <div className="search-box">
-                  <input
-                    type="text"
-                    placeholder="Məhsul axtar"
-                    value={searchTerms[group.id] || ""}
-                    onChange={(e) =>
-                      setSearchTerms((prev) => ({
-                        ...prev,
-                        [group.id]: e.target.value,
-                      }))
-                    }
-                  />
-                </div>
-                <ul className="filter-options">
-                  {group.options
-                    .filter((opt) =>
-                      opt
-                        .toLowerCase()
-                        .includes((searchTerms[group.id] || "").toLowerCase()),
-                    )
-                    .map((opt) => (
-                      <li key={opt} onClick={() => toggleFilter(group.id, opt)}>
-                        <span
-                          className={`checkbox ${isChecked(group.id, opt) ? "checked" : ""}`}
-                        />
-                        {opt}
-                      </li>
-                    ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </aside>
+        {filterOpen && (
+          <button
+            type="button"
+            className="filter-backdrop"
+            onClick={closeFilter}
+            aria-label="Filteri bağla"
+          />
+        )}
 
-        <main className="products-grid">
-          {productsData.map((product, i) => (
-            <Link
-              to={product.link}
-              className="product-card"
-              key={product.id}
-              style={{ animationDelay: `${i * 0.05}s` }}
+        <aside
+          className={`sidebar ${filterOpen ? "open" : ""}`}
+          aria-hidden={!filterOpen}
+        >
+          <div className="sidebar__mobile-head">
+            <span>Filter</span>
+            <button
+              type="button"
+              className="sidebar__close-btn"
+              onClick={closeFilter}
+              aria-label="Filteri bağla"
             >
-              <div className="card-img">
-                <img src={product.img} alt={product.title} />
-              </div>
-              <div className="card-body">
-                <div className="card-title-row">
-                  <h3>{product.title}</h3>
-                  <Arrow className="arrow-icon" />
+              <FilterClose />
+            </button>
+          </div>
+
+          <div className="sidebar__content">
+            {filterGroups.map((group) => (
+              <div className="filter-group" key={group.id}>
+                <div className="filter-box filter-label-box">
+                  <span className="filter-group-label">{group.label}</span>
                 </div>
-                <p>{product.desc}</p>
+                <div className="filter-box filter-options-box">
+                  <div className="search-box">
+                    <input
+                      type="text"
+                      placeholder="Məhsul axtar"
+                      value={searchTerms[group.id] || ""}
+                      onChange={(e) =>
+                        setSearchTerms((prev) => ({
+                          ...prev,
+                          [group.id]: e.target.value,
+                        }))
+                      }
+                    />
+                  </div>
+                  <ul className="filter-options">
+                    {group.options
+                      .filter((option) =>
+                        option.label
+                          .toLowerCase()
+                          .includes(
+                            (searchTerms[group.id] || "").toLowerCase()
+                          )
+                      )
+                      .map((option) => (
+                        <li
+                          key={option.id}
+                          onClick={() => toggleFilter(group.id, option.id)}
+                        >
+                          <span
+                            className={`checkbox ${isChecked(group.id, option.id) ? "checked" : ""}`}
+                          />
+                          {option.label}
+                        </li>
+                      ))}
+                  </ul>
+                </div>
               </div>
-            </Link>
-          ))}
+            ))}
+          </div>
+        </aside>
+        <main className="products-grid">
+          {loading ? (
+            <p className="products-page__status">Yüklənir...</p>
+          ) : filteredProducts.length ? (
+            filteredProducts.map((product, index) => (
+              <ProductsPageCard
+                key={product.id}
+                product={product}
+                index={index}
+              />
+            ))
+          ) : (
+            <p className="products-page__status">
+              Seçilmiş filtrlərə uyğun məhsul tapılmadı.
+            </p>
+          )}
         </main>
       </div>
     </div>

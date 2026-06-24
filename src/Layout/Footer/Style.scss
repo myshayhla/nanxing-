@@ -119,15 +119,22 @@ footer {
       align-items: center;
       gap: 16px;
 
-      a {
+      a,
+      .socials__placeholder {
         text-decoration: none;
         color: #212121;
         font-size: 14px;
         transition: color 0.2s ease;
+        display: flex;
+        align-items: center;
+      }
 
-        &:hover {
-          color: #37a645;
-        }
+      a:hover {
+        color: #37a645;
+      }
+
+      .socials__placeholder {
+        opacity: 0.45;
       }
     }
   }

@@ -1,11 +1,12 @@
-import React from 'react';
 import "./Style.scss";
 import ContactImg from "../../assets/Images/HomeContact.webp";
 import Arrow from "../../assets/Icons/Arrow-white.svg?react";
 import List from "../../assets/Icons/title-icon.svg?react";
-import MainBtn from '../MainBtn/MainBtn';
-import { Link } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
+import {
+  getWhatsAppContactUrl,
+  getWhatsAppOrderUrl,
+} from "../../utils/whatsapp";
 
 function HomeContact() {
   return (
@@ -24,18 +25,24 @@ function HomeContact() {
             </p>
           </div>
           <div className="buttons">
-              <button className="green-btn">
-            <Link>
-                <span>Sifariş et </span>
-                <Arrow className="arrow-icon" />
-            </Link>
-              </button>
-              <button className="main-btn">
-            <Link to={"/contact-us"}>
-                <span>Bizimlə Əlaqə</span>
-                <Arrow className="arrow-icon" />
-            </Link>
-              </button>
+            <a
+              href={getWhatsAppOrderUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="green-btn"
+            >
+              <span>Sifariş et </span>
+              <Arrow className="arrow-icon" />
+            </a>
+            <a
+              href={getWhatsAppContactUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="main-btn"
+            >
+              <span>Bizimlə Əlaqə</span>
+              <Arrow className="arrow-icon" />
+            </a>
           </div>
         </div>
         <div className="right">

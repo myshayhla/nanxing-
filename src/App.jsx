@@ -9,6 +9,7 @@ import Photos from "./Pages/Photos/Photos";
 import Videos from "./Pages/Videos/Videos";
 import ContactPage from "./Pages/ContactPage/ContactPage";
 import ProductDetail from "./Pages/ProductDetail/ProductDetail";
+import NewsDetail from "./Pages/NewsDetail/NewsDetail";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about-us" element={<AboutPage />} />
         <Route path="/news" element={<NewsPage />} />
+        <Route path="/news/:id" element={<NewsDetail />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/photos" element={<Photos />} />

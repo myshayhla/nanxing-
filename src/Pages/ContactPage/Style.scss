@@ -185,6 +185,13 @@
   }
 }
 
+.contact-form__feedback {
+  margin: 0;
+  font-size: 14px;
+  line-height: 150%;
+  color: #37a645;
+}
+
 .contact-map-panel {
   display: flex;
   flex-direction: column;
@@ -286,6 +293,7 @@
     height: 36px;
     background-color: #ECECEC;
     border-radius: 50%;
+    text-decoration: none;
     svg {
       width: 20px;
       height: 20px;
